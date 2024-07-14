@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server2
+  template:
+    metadata:
+      labels:
+        app: server2
+    spec:
+      containers:
+      - name: server2
+        image: shahchhatru/pdfserver:latest
+        env: 
+        - name: PORT
+          value: "3002"
+        - name: CORS
+          value: "http://ems.chhatrabikramshah.com.np"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server2
+spec:
+  selector:
+    app: server2
+  ports:
+    - port: 3002

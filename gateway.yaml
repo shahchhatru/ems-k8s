@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - name: api-gateway
+        image: shahchhatru/ems-gateway:latest
+        env:
+        - name: API_SERVER1
+          value: "http://server1:3000/api/v1"
+        - name: API_SERVER2
+          value: "http://server2:3002/api/v1"
+        - name: CORS
+          value: "http://ems.chhatrabikramshah.com.np"
+        - name: PORT
+          value: "3001"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+spec:
+  selector:
+    app: api-gateway
+  ports:
+    - port: 80
+      targetPort: 3001  # This should match the PORT env variable in your Deployment
+  type: LoadBalancer  # This exposes the service externally  # This exposes the service externally

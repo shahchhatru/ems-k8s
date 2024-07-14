@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server1
+  template:
+    metadata:
+      labels:
+        app: server1
+    spec:
+      containers:
+      - name: server1
+        image: shahchhatru/ems-express-server:latest
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: MONGO_URI
+          value: "mongodb://mongodb:27017/mydatabase"
+        - name: ACCESS_KEY
+          value: SxCA0gt9cDAKZacXIh2Jrnphg9MeU8CR
+        - name: REFRESH_KEY
+          value: T5yOy3K0jL4bY4hLwP6yWvzR5cH3mO6r
+        - name: EMAIL
+          value: "076bct021.chhatra@pcampus.edu.np"
+        - name: EMAIL_PASSWORD
+          value: zvcnfalqbddevxtj
+        - name: JWT_PASSWORD_KEY
+          value: acXIh2Jrnphg9MeU8CRhWnmxNUAt71QMYSAMW
+        - name: FRONTEND_URL
+          value: "http://ems.chhatrabikramshah.com.np/"
+        - name: PORT
+          value: "3000"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server1
+spec:
+  selector:
+    app: server1
+  ports:
+    - port: 3000
