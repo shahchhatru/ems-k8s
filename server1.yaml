@@ -30,7 +30,7 @@ spec:
         - name: EMAIL
           value: "076bct021.chhatra@pcampus.edu.np"
         - name: EMAIL_PASSWORD
-          value: zvcnfalqbddevxtj
+          value: kemxienlxoex
         - name: JWT_PASSWORD_KEY
           value: acXIh2Jrnphg9MeU8CRhWnmxNUAt71QMYSAMW
         - name: FRONTEND_URL
